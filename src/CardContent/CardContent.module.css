@@ -1,0 +1,24 @@
+.cardContent {
+    box-sizing: border-box;
+    padding: 10px 20px;
+}
+
+.header {
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+    line-height: 28px;
+    margin: 0;
+}
+
+.date {
+    font-size: 12px;
+    line-height: 22px;
+    color: rgba(130, 126, 126, 1);
+}
+
+.text {
+    font-size: 12px;
+    line-height: 22px;
+    color: black;
+}
