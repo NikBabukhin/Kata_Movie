@@ -7,6 +7,6 @@ type GenresPropsType = {
 
 export const Genres:React.FC<GenresPropsType> = ({genres}) => {
   return <div className={style.wrapper}>
-    {genres.length?genres.map(genre=><div className={style.genreCard}>{genre}</div>):'No results'}
+    {genres.length?genres.map(genre=><div className={style.genreCard} key={genre.toString() + genre.toString().length}>{genre}</div>):'No results'}
   </div>
 }

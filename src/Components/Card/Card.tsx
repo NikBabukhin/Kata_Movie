@@ -1,7 +1,7 @@
 import style from "./Card.module.css";
 import { CardContent } from "../CardContent/CardContent";
 import React from "react";
-import placeholder from "../assets/images/placeholder.png"
+import placeholder from "../../assets/images/placeholder.png"
 
 type CardPropsType = {
   id: number,
@@ -9,7 +9,7 @@ type CardPropsType = {
   image: string|null,
   title: string,
   release_date: string,
-  overview: string,
+  overview: string|null,
 }
 
 const testImage = "https://via.placeholder.com/180x280"
