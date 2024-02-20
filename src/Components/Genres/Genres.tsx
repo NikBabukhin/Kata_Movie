@@ -1,12 +1,26 @@
-import React from "react";
-import style from './Ganres.module.css'
+import React, { useContext } from "react";
+import style from "./Ganres.module.css";
+import { GenresContext, useGenresContext } from "../../index";
 
 type GenresPropsType = {
-  genres: number[] | string[],
+  genres: number[],
 }
 
-export const Genres:React.FC<GenresPropsType> = ({genres}) => {
-  return <div className={style.wrapper}>
-    {genres.length?genres.map(genre=><div className={style.genreCard} key={genre.toString() + genre.toString().length}>{genre}</div>):'No results'}
-  </div>
-}
+export const Genres: React.FC<GenresPropsType> = ({ genres }) => {
+  const context = useContext(GenresContext);
+  const genresToShow = () => {
+    if (genres.length>3) {
+      return [context[genres[0]], context[genres[1]], `Other ${genres.length-2} ...`]
+    }
+    return genres.map(genre=>context[genre])
+  }
+  return <GenresContext.Consumer>
+    {() => {
+      return <div className={style.wrapper}>
+        {genres.length ? genresToShow().map(el => <div className={style.genreCard}
+                                                  key={el}>{el}</div>) : "No genres"}
+      </div>;
+    }
+    }
+  </GenresContext.Consumer>;
+};

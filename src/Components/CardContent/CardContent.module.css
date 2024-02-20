@@ -1,6 +1,14 @@
 .cardContent {
     box-sizing: border-box;
-    padding: 10px 20px;
+    padding: 10px 10px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -21,4 +29,17 @@
     font-size: 12px;
     line-height: 22px;
     color: black;
+    margin-right: 10px;
+    display: block;
+}
+
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ratingWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
 }

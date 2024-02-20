@@ -14,6 +14,8 @@ export type FilmType = {
   description: string,
   poster_path: string | null,
   overview: string | null,
+  vote_average: number | null,
+  rating?:number,
 }
 
 type CardsWrapperPropsType = {
@@ -26,7 +28,8 @@ export const CardsWrapper: React.FC<CardsWrapperPropsType> = ({ changeResultCoun
   const [films, setFilms] = useState([] as FilmType[]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [isResultLength, setResultLength] = useState<boolean>(true)
+  const [isResultLength, setResultLength] = useState<boolean>(true);
+
 
   useEffect(() => {
     if (findValue) {
@@ -35,14 +38,14 @@ export const CardsWrapper: React.FC<CardsWrapperPropsType> = ({ changeResultCoun
         if (!response) {
           setError("error");
           setIsLoading(false);
-        } else if(response.results.length === 0) {
+        } else if (response.results.length === 0) {
           setIsLoading(false);
           setFilms(response.results);
-          setResultLength(false)
-          changeResultCount(response.resultCount)
+          setResultLength(false);
+          changeResultCount(response.resultCount);
         } else {
           setFilms(response.results);
-          setResultLength(true)
+          setResultLength(true);
           changeResultCount(response.resultCount);
           setIsLoading(false);
         }
@@ -55,14 +58,15 @@ export const CardsWrapper: React.FC<CardsWrapperPropsType> = ({ changeResultCoun
 
   return <div className={style.wrapper}>
     {error ? <ErrorComponent errorText={error} />
-      : isLoading ? <Loading />
+      : isLoading ? <Loading size={'large'}/>
         : isResultLength ? films.map(film => <Card id={film.id}
-                                                 key={film.id}
-                                                 genres={film.genre_ids}
-                                                 title={film.title || "Unknown"}
-                                                 image={film.poster_path ? `https://image.tmdb.org/t/p/w500${film.poster_path}` : null}
-                                                 overview={film.overview}
-                                                 release_date={film.release_date} />)
+                                                   key={film.id}
+                                                   genres={film.genre_ids}
+                                                   title={film.title || "Unknown"}
+                                                   image={film.poster_path ? `https://image.tmdb.org/t/p/w500${film.poster_path}` : null}
+                                                   overview={film.overview}
+                                                   vote_average={film.vote_average || 0}
+                                                   release_date={film.release_date} />)
           : "No results"}
 
   </div>;

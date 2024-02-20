@@ -6,3 +6,8 @@
     -moz-box-shadow: 4px 4px 8px 5px rgba(34, 60, 80, 0.2);
     box-shadow: 4px 4px 8px 5px rgba(34, 60, 80, 0.2);
 }
+
+.cardContent {
+    min-width: 270px;
+    display: flex;
+}

@@ -1,8 +1,13 @@
 import { Flex, Spin } from "antd";
 import React from "react";
 
-export const Loading:React.FC = () => {
+type LoadingPropsType = {
+  size: "small" | "large" | "default",
+  background?: boolean,
+}
+
+export const Loading:React.FC<LoadingPropsType> = ({size, background}) => {
   return <Flex align="center" gap="middle">
-    <Spin size="large"> <span>Loading...</span> </Spin>
+    <Spin size={size}> {background?<span>Loading...</span>:''} </Spin>
   </Flex>;
 };
