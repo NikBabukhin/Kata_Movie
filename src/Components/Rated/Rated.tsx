@@ -23,8 +23,11 @@ export const Rated: React.FC = () => {
   useEffect(() => {
     setIsLoading(true);
     getRatedFilms(currentPage).then(response => {
-      if (!response || !response.results || !response.resultCount) {
+      if (!response) {
         setError('no correct response from server')
+        setIsLoading(false)
+      } else if(!response.results || !response.resultCount) {
+        setError('No results from server')
         setIsLoading(false)
       } else {
         setFilms(response.results);
