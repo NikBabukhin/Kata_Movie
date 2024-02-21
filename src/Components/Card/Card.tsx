@@ -16,6 +16,14 @@ type CardPropsType = {
 
 export const Card: React.FC<CardPropsType> = ({ id, genres, image, title, release_date, overview, vote_average , currentRating}) => {
 
+  const getRatingFromStorage = (filmId: number): number|undefined => {
+    const ratedFilms = sessionStorage.getItem('ratedFilms')
+    if (ratedFilms) {
+      const films = JSON.parse(ratedFilms)
+      return films[filmId]
+    }
+  }
+
   return <div className={style.card}>
     <div>
       <img alt="cinema image" src={image || placeholder} style={{width: 180, height: 280}} />
@@ -28,7 +36,7 @@ export const Card: React.FC<CardPropsType> = ({ id, genres, image, title, releas
         release_date={release_date}
         overview={overview}
         vote_average={vote_average}
-        currentRating={currentRating}
+        currentRating={getRatingFromStorage(id) || currentRating}
       />
     </div>
   </div>;

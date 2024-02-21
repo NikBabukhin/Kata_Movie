@@ -51,6 +51,18 @@ export const CardContent: React.FC<CardContentPropsType> = ({
     }
   };
 
+  const setRatingInStorage = (filmId: number, rating: number) => {
+    const ratedFilms = sessionStorage.getItem('ratedFilms')
+    let films;
+    if (ratedFilms) {
+      films = JSON.parse(ratedFilms)
+      films[filmId] = rating
+      sessionStorage.setItem('ratedFilms', JSON.stringify(films))
+    } else {
+      sessionStorage.setItem('ratedFilms', JSON.stringify({[filmId]: rating}))
+    }
+  }
+
   const setRating = (value: number) => {
     setIsLoading(true)
     postRating(id, value).then(res=>{
@@ -58,6 +70,7 @@ export const CardContent: React.FC<CardContentPropsType> = ({
         setErrorRating(null)
         setIsLoading(false)
         setLocalRating(value)
+        setRatingInStorage(id, value)
       } else {
         throw new Error('Error with server')
       }

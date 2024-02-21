@@ -17,7 +17,7 @@ export const getGuestSession = async () => {
 };
 
 export const getGuestSessionToken = async () => {
-  const stringLocalSessionToken = localStorage.getItem('guestSession')
+  const stringLocalSessionToken = sessionStorage.getItem('guestSession')
   if (stringLocalSessionToken) {
     const sessionData = {
       sessionId: JSON.parse(stringLocalSessionToken).sessionId,
@@ -27,7 +27,8 @@ export const getGuestSessionToken = async () => {
       return sessionData
     } else {
       return await getGuestSession().then(sessionData=>{
-        localStorage.setItem('guestSession', JSON.stringify(sessionData))
+        sessionStorage.clear()
+        sessionStorage.setItem('guestSession', JSON.stringify(sessionData))
         return sessionData
       }).catch(err=>{
         throw new Error(err)
@@ -35,7 +36,8 @@ export const getGuestSessionToken = async () => {
     }
   } else {
     return await getGuestSession().then(sessionData=>{
-      localStorage.setItem('guestSession', JSON.stringify(sessionData))
+      sessionStorage.clear()
+      sessionStorage.setItem('guestSession', JSON.stringify(sessionData))
       return sessionData
     }).catch(err=>{
       throw new Error(err)
